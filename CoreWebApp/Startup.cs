@@ -32,7 +32,7 @@ namespace CoreWebApp
             {
                 option.UseSqlServer(Configuration.GetConnectionString("CarDb"));
             });
-            services.AddTransient(typeof(IRepository<>), typeof(DbRepository<>));
+            //services.AddTransient(typeof(IRepository<>), typeof(DbRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +56,7 @@ namespace CoreWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Car}/{action=Create}/{id?}");
             });
         }
     }

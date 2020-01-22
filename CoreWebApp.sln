@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreWebApp", "CoreWebApp\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{7E1C8F06-5D0F-4677-B912-7084B6B2FAB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{2B6B9FB8-AE50-40A6-9071-4E110496EE3C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreWebApi", "CoreWebApi\CoreWebApi.csproj", "{91EC9FFA-0FB4-4728-B561-588F7B6CB42E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreWebApi", "CoreWebApi\CoreWebApi.csproj", "{91EC9FFA-0FB4-4728-B561-588F7B6CB42E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{7E1C8F06-5D0F-4677-B912-7084B6B2FAB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1C8F06-5D0F-4677-B912-7084B6B2FAB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1C8F06-5D0F-4677-B912-7084B6B2FAB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B6B9FB8-AE50-40A6-9071-4E110496EE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B6B9FB8-AE50-40A6-9071-4E110496EE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B6B9FB8-AE50-40A6-9071-4E110496EE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B6B9FB8-AE50-40A6-9071-4E110496EE3C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91EC9FFA-0FB4-4728-B561-588F7B6CB42E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91EC9FFA-0FB4-4728-B561-588F7B6CB42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91EC9FFA-0FB4-4728-B561-588F7B6CB42E}.Release|Any CPU.ActiveCfg = Release|Any CPU

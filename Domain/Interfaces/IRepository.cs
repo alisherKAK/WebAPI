@@ -2,14 +2,14 @@
 
 namespace Domain.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TEntity, TDto> where TEntity : class where TDto : class
     {
-        void Add(T item);
-        void Delete(T item);
+        void Add(TEntity item);
+        void Delete(TEntity item);
         void Delete(int? id);
-        void Update(T item);
-        IEnumerable<T> GetAll();
-        T Get(T item);
-        T Get(int? id);
+        void Update(TEntity item);
+        IEnumerable<TDto> GetAll();
+        TDto Get(TEntity item);
+        TDto Get(int? id);
     }
 }

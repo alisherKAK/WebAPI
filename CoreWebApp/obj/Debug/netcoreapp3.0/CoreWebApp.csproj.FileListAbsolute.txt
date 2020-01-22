@@ -148,3 +148,4 @@ C:\Users\калабаева\source\repos\CoreWebApp\CoreWebApp\obj\Debug\netcore
 C:\Users\калабаева\source\repos\CoreWebApp\CoreWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Car\Details.cshtml.g.cs
 C:\Users\калабаева\source\repos\CoreWebApp\CoreWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Car\Edit.cshtml.g.cs
 C:\Users\калабаева\source\repos\CoreWebApp\CoreWebApp\obj\Debug\netcoreapp3.0\Razor\Views\Car\Index.cshtml.g.cs
+C:\Users\калабаева\source\repos\CoreWebApp\CoreWebApp\bin\Debug\netcoreapp3.0\AutoMapper.dll

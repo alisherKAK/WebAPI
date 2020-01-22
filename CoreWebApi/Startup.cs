@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
+using Domain.AutoMapper;
 using Domain.DbContexts;
 using Domain.Interfaces;
 using Domain.Repositories;
+using Domain.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace CoreWebApi
 {
@@ -33,8 +31,12 @@ namespace CoreWebApi
             {
                 option.UseSqlServer(Configuration.GetConnectionString("CarDb"));
             });
-            services.AddTransient<DbContext, CarDbContext>();
-            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
+            services.AddScoped<DbContext, CarDbContext>();
+            services.AddScoped(typeof(IRepository<,>), typeof(DbRepository<,>));
+
+            services.AddScoped(typeof(IService<,,>), typeof(Service<,,>));
+
+            services.AddTransient(typeof(IMapper), config => AutoMapperConfiguration.Config());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

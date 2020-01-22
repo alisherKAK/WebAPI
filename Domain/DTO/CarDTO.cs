@@ -1,6 +1,6 @@
-﻿namespace Domain.Resources
+﻿namespace Domain.DTO
 {
-    public class CarResource
+    public class CarDTO
     {
         public int Id { get; set; }
         public string Brand { get; set; }

@@ -1,54 +1,59 @@
-﻿using Domain.Interfaces;
+﻿using AutoMapper;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Domain.Repositories
 {
-    public class DbRepository<T> : IRepository<T> where T : class, IEntity
+    public class DbRepository<TEntity, TDto> : IRepository<TEntity, TDto> where TEntity : class, IEntity where TDto : class
     {
         private readonly DbContext _context;
-        public DbRepository(DbContext context)
+        private readonly IMapper _mapper;
+        public DbRepository(DbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public void Add(T item)
+        public void Add(TEntity item)
         {
-            _context.Set<T>().Add(item);
+            _context.Set<TEntity>().Add(item);
             _context.SaveChanges();
         }
 
-        public void Delete(T item)
+        public void Delete(TEntity item)
         {
-            _context.Set<T>().Remove(item);
+            _context.Set<TEntity>().Remove(item);
             _context.SaveChanges();
         }
 
         public void Delete(int? id)
         {
-            var item = _context.Set<T>().FirstOrDefault(i => i.Id == id);
+            var item = _context.Set<TEntity>().FirstOrDefault(i => i.Id == id);
             Delete(item);
         }
 
-        public T Get(T item)
+        public TDto Get(TEntity item)
         {
             return Get(item.Id);
         }
 
-        public T Get(int? id)
+        public TDto Get(int? id)
         {
-            return _context.Set<T>().FirstOrDefault(i => i.Id == id);
+            var entity = _context.Set<TEntity>().FirstOrDefault(i => i.Id == id);
+            return _mapper.Map<TDto>(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<TDto> GetAll()
         {
-            return _context.Set<T>().ToList();
+            var entities = _context.Set<TEntity>().ToList();
+            return _mapper.Map<IEnumerable<TDto>>(entities);
         }
 
-        public void Update(T item)
+        public void Update(TEntity item)
         {
-            var oldItem = Get(item.Id);
+            var oldItem = _context.Set<TEntity>().ToList().Where(i => i.Id == item.Id).FirstOrDefault();
 
             _context.Entry(oldItem).CurrentValues.SetValues(item);
             _context.SaveChanges();
