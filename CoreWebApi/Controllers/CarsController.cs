@@ -4,6 +4,7 @@ using AutoMapper;
 using Domain.DTO;
 using Domain.Models;
 using Domain.Resources;
+using Domain.Responses;
 using Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,9 @@ namespace CoreWebApi.Controllers
     [Route("api/[controller]")]
     public class CarsController : ControllerBase
     {
-        private readonly IService<Car, CarDTO, CarResource> _serviceCar;
+        private readonly IService<Car, CarDTO, CarResource, CarResponse> _serviceCar;
         private readonly IMapper _mapper;
-        public CarsController(IService<Car, CarDTO, CarResource> serviceCar, IMapper mapper)
+        public CarsController(IService<Car, CarDTO, CarResource, CarResponse> serviceCar, IMapper mapper)
         {
             _serviceCar = serviceCar;
             _mapper = mapper;
@@ -41,29 +42,39 @@ namespace CoreWebApi.Controllers
             }
 
             var carDto = _mapper.Map<CarDTO>(carResource);
-            _serviceCar.Add(carDto);
+            var response = _serviceCar.Add(carDto);
 
-            return Ok();
+            if (response.IsSuccess)
+                return Ok(response.Object);
+
+            return BadRequest(response.ErrorMessage);
         }
-        [HttpPut("{id?}")]
-        public IActionResult Put(int? id,[FromBody] CarResource carResource)
+        [HttpPut("{id}")]
+        public IActionResult Put(int id,[FromBody] CarResource carResource)
         {
-            if (!ModelState.IsValid && id != 0)
+            if (!ModelState.IsValid)
             {
                 return NotFound();
             }
 
             var carDto = _mapper.Map<CarDTO>(carResource);
-            carDto.Id = (int)id;
-            _serviceCar.Update(carDto);
+            carDto.Id = id;
+            var response = _serviceCar.Update(carDto);
 
-            return Ok();
+            if(response.IsSuccess)
+                return Ok(response.Object);
+
+            return BadRequest(response.ErrorMessage);
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _serviceCar.Delete(id);
-            return Ok();
+            var response = _serviceCar.Delete(id);
+
+            if(response.IsSuccess)
+                return Ok(response.Object);
+
+            return BadRequest(response.ErrorMessage);
         }
     }
 }

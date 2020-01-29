@@ -16,22 +16,27 @@ namespace Domain.Repositories
             _mapper = mapper;
         }
 
-        public void Add(TEntity item)
+        public TEntity Add(TEntity item)
         {
             _context.Set<TEntity>().Add(item);
-            _context.SaveChanges();
+            //_context.SaveChanges();
+
+            return _context.Entry(item).Entity;
         }
 
-        public void Delete(TEntity item)
+        public TEntity Delete(TEntity item)
         {
             _context.Set<TEntity>().Remove(item);
-            _context.SaveChanges();
+            //_context.SaveChanges();
+
+            return _context.Entry(item).Entity;
+
         }
 
-        public void Delete(int? id)
+        public TEntity Delete(int? id)
         {
             var item = _context.Set<TEntity>().FirstOrDefault(i => i.Id == id);
-            Delete(item);
+            return Delete(item);
         }
 
         public TDto Get(TEntity item)
@@ -51,12 +56,14 @@ namespace Domain.Repositories
             return _mapper.Map<IEnumerable<TDto>>(entities);
         }
 
-        public void Update(TEntity item)
+        public TEntity Update(TEntity item)
         {
             var oldItem = _context.Set<TEntity>().ToList().Where(i => i.Id == item.Id).FirstOrDefault();
 
             _context.Entry(oldItem).CurrentValues.SetValues(item);
-            _context.SaveChanges();
+            //_context.SaveChanges();
+
+            return _context.Entry(item).Entity;
         }
     }
 }
