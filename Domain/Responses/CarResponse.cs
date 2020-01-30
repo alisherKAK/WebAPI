@@ -1,22 +1,16 @@
-﻿using Domain.Interfaces;
+﻿using Domain.ConstructorRequirements;
+using Domain.Interfaces;
 using Domain.Models;
 
 namespace Domain.Responses
 {
-    public class CarResponse : IResponse<Car>
+    public class CarResponse : BaseResponse<Car>
     {
-        public Car Object { get; set; }
-        public bool IsSuccess { get; set; }
-        public string ErrorMessage { get; set; }
-
-        private CarResponse(Car car, bool isSuccess, string errorMessage)
+        private CarResponse(Car car, bool isSuccess, string errorMessage) : base(car, isSuccess, errorMessage)
         {
-            Object = car;
-            IsSuccess = isSuccess;
-            ErrorMessage = errorMessage;
         }
 
-        public CarResponse(Car car) : this(car, true, "") { }
-        public CarResponse(string errorMessage) : this(null, false, errorMessage) { }
+        //public CarResponse(Car car) : this(car, true, "") { }
+        //public CarResponse(string errorMessage) : this(null, false, errorMessage) { }
     }
 }
